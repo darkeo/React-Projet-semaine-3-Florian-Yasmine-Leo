@@ -5,7 +5,6 @@ const initialState = {
     firstName: '',
     lastName: '',
     email: '',
-    isLogged: false,
   },
   errors: [],
   formValidation: false,

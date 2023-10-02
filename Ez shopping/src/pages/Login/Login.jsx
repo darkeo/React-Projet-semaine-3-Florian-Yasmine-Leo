@@ -7,12 +7,9 @@ import {
   selectFormValidation,
   selectUser,
 } from '../../store/selectors/userSelectors';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector(selectUser);
   const errors = useSelector(selectErros);
   const formValidation = useSelector(selectFormValidation);
