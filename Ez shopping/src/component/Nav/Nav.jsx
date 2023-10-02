@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 import "./Nav.scss";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/selectors/userSelectors"; // Update the import path as needed
+import { selectFormValidation } from "../../store/selectors/userSelectors";
 
 export default function Nav() {
   const user = useSelector(selectUser);
-  console.log(user, "user");
+  const userValid = useSelector(selectFormValidation);
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -22,7 +23,7 @@ export default function Nav() {
       </NavLink>
       <div>
         <NavLink style={style} to={"/login"}>
-          {user.isLogged
+          {userValid
             ? `${capitalizeFirstLetter(user.firstName)} ${capitalizeFirstLetter(
                 user.lastName
               )}`
