@@ -1,14 +1,26 @@
 import { useDispatch } from 'react-redux';
 import { modifyUser, validateUser } from '../../store/slices/userSlice';
 import { useSelector } from 'react-redux';
-import { selectErros, selectUser } from '../../store/selectors/userSelectors';
+import {
+  selectErros,
+  selectFormValidation,
+  selectUser,
+} from '../../store/selectors/userSelectors';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector(selectUser);
   const errors = useSelector(selectErros);
+  const formValidation = useSelector(selectFormValidation);
 
-  console.log(errors);
+  useEffect(() => {
+    if (formValidation) {
+      navigate('/');
+    }
+  }, [formValidation]);
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
@@ -46,6 +58,12 @@ const Login = () => {
           Email
           <input type='email' onChange={handleEmailChange} />
         </label>
+        <ul>
+          {errors &&
+            errors.map((error, index) => {
+              return <li key={index}>{error}</li>;
+            })}
+        </ul>
         <input type='submit' value={'Se connecter'} />
       </form>
     </>
