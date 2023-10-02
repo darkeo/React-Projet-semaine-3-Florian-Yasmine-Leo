@@ -1,11 +1,31 @@
 import './HomePage.scss';
+import React, { useState, useEffect } from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import ProductList from '../../component/ProductList/ProductList';
+import { getProducts } from '../../store/slices/productsSlice';
+import { selectProducts } from '../../store/selectors/productsSelectors';
 
 const HomePage = () => {
+  const dispatch = useDispatch()
+
+  const products = useSelector(selectProducts)
+
+  console.log(products)
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+      .then(res => res.json())
+      .then(data => dispatch(getProducts(data)))
+      .catch(err => console.log(err))
+  }, []);
+
+
   return (
-    <>
-      <h1 className='title'>HomePage</h1>
-    </>
+    <div>  
+      <h1>HomePage</h1>
+      <ProductList products={products}/>
+    </div>
   );
-};
+}
 
 export default HomePage;
