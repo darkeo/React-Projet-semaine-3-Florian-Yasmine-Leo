@@ -3,7 +3,7 @@ import './HomePage.scss';
 const HomePage = () => {
   return (
     <>
-      <h1 id='title'>HomePage</h1>
+      <h1 className='title'>HomePage</h1>
     </>
   );
 };
