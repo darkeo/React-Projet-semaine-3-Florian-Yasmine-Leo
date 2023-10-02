@@ -20,14 +20,16 @@ export default function Nav() {
       <NavLink className="home-link" to={"/"}>
         EZ Shopping
       </NavLink>
-      <div className="">
+      <div>
         <NavLink style={style} to={"/login"}>
-          {`${capitalizeFirstLetter(user.firstName)} ${capitalizeFirstLetter(
-            user.lastName
-          )}`}
+          {user.isLogged
+            ? `${capitalizeFirstLetter(user.firstName)} ${capitalizeFirstLetter(
+                user.lastName
+              )}`
+            : "Anonyme"}
         </NavLink>
         <NavLink style={style} to={"/cart"}>
-          items: 
+          items:
         </NavLink>
         <NavLink style={style} to={" "}>
           darkmode
