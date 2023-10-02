@@ -1,3 +1,4 @@
+import './Login.scss';
 import { useDispatch } from 'react-redux';
 import { modifyUser, validateUser } from '../../store/slices/userSlice';
 import { useSelector } from 'react-redux';
@@ -15,12 +16,6 @@ const Login = () => {
   const user = useSelector(selectUser);
   const errors = useSelector(selectErros);
   const formValidation = useSelector(selectFormValidation);
-
-  useEffect(() => {
-    if (formValidation) {
-      navigate('/');
-    }
-  }, [formValidation]);
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
@@ -44,28 +39,49 @@ const Login = () => {
 
   return (
     <>
-      <h1>Login</h1>
-      <form onSubmit={submitForm}>
-        <label>
-          Prénom
-          <input onChange={handleFirstNameChange} type='text' />
-        </label>
-        <label>
-          Nom
-          <input onChange={handleLastNameChange} type='text' />
-        </label>
-        <label>
-          Email
-          <input type='email' onChange={handleEmailChange} />
-        </label>
-        <ul>
-          {errors &&
-            errors.map((error, index) => {
-              return <li key={index}>{error}</li>;
-            })}
-        </ul>
-        <input type='submit' value={'Se connecter'} />
-      </form>
+      <div className='page'>
+        <h1>Hi {formValidation && user.firstName}</h1>
+        <h2>Customize your profile here</h2>
+        <form className='form' onSubmit={submitForm}>
+          <label>
+            Your firstname :
+            <input
+              onChange={handleFirstNameChange}
+              type='text'
+              value={user.firstName}
+            />
+          </label>
+          <br />
+          <label>
+            Your lastName :
+            <input
+              onChange={handleLastNameChange}
+              type='text'
+              value={user.lastName}
+            />
+          </label>
+          <br />
+          <label>
+            Your email :
+            <input
+              type='email'
+              onChange={handleEmailChange}
+              value={user.email}
+            />
+          </label>
+          <ul>
+            {errors &&
+              errors.map((error, index) => {
+                return (
+                  <li className='errorMessage' key={index}>
+                    {error}
+                  </li>
+                );
+              })}
+          </ul>
+          <input className='form__button' type='submit' value={'Save'} />
+        </form>
+      </div>
     </>
   );
 };
