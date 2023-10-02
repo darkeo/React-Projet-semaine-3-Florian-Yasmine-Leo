@@ -32,9 +32,9 @@ export default function Nav() {
         <NavLink style={style} to={"/cart"}>
           items:
         </NavLink>
-        <NavLink style={style} to={" "}>
+        <button>
           darkmode
-        </NavLink>
+        </button>
       </div>
     </nav>
   );
