@@ -6,6 +6,11 @@ const initialState = {
     lastName: '',
     email: '',
   },
+  pendingUser: {
+    firstName: '',
+    lastName: '',
+    email: '',
+  },
   errors: [],
   formValidation: false,
 };
@@ -17,6 +22,10 @@ const userSlice = createSlice({
     modifyUser(state, action) {
       const newUser = action.payload;
       state.user = newUser;
+    },
+    modifyPendingUser(state, action) {
+      const user = action.payload;
+      state.pendingUser = user;
     },
     validateUser(state, action) {
       state.errors = [];
@@ -35,13 +44,17 @@ const userSlice = createSlice({
       if (!newUser.email.toLowerCase().match(regexEmail)) {
         state.errors.push(`Format d'email incorrect`);
       }
-      state.errors.length > 0
-        ? (state.formValidation = false)
-        : (state.formValidation = true);
+      if (state.errors.length > 0) {
+        state.formValidation = false;
+      } else {
+        state.formValidation = true;
+        state.user = state.pendingUser;
+      }
     },
   },
 });
 
-export const { modifyUser, validateUser } = userSlice.actions;
+export const { modifyUser, modifyPendingUser, validateUser } =
+  userSlice.actions;
 
 export default userSlice;

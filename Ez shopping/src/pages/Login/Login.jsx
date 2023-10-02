@@ -1,37 +1,40 @@
 import './Login.scss';
 import { useDispatch } from 'react-redux';
-import { modifyUser, validateUser } from '../../store/slices/userSlice';
+import { modifyPendingUser, validateUser } from '../../store/slices/userSlice';
 import { useSelector } from 'react-redux';
 import {
-  selectErros,
+  selectErrors,
   selectFormValidation,
+  selectPendingUser,
   selectUser,
 } from '../../store/selectors/userSelectors';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const pendingUser = useSelector(selectPendingUser);
   const user = useSelector(selectUser);
-  const errors = useSelector(selectErros);
+
+  const errors = useSelector(selectErrors);
   const formValidation = useSelector(selectFormValidation);
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
-    dispatch(modifyUser({ ...user, firstName: value }));
+    dispatch(modifyPendingUser({ ...pendingUser, firstName: value }));
   };
 
   const handleLastNameChange = (e) => {
     const value = e.target.value;
-    dispatch(modifyUser({ ...user, lastName: value }));
+    dispatch(modifyPendingUser({ ...pendingUser, lastName: value }));
   };
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
-    dispatch(modifyUser({ ...user, email: value }));
+    dispatch(modifyPendingUser({ ...pendingUser, email: value }));
   };
 
   const submitForm = (e) => {
     e.preventDefault();
-    dispatch(validateUser(user));
+    dispatch(validateUser(pendingUser));
   };
 
   return (
@@ -45,7 +48,7 @@ const Login = () => {
             <input
               onChange={handleFirstNameChange}
               type='text'
-              value={user.firstName}
+              value={pendingUser.firstName}
             />
           </label>
           <br />
@@ -54,7 +57,7 @@ const Login = () => {
             <input
               onChange={handleLastNameChange}
               type='text'
-              value={user.lastName}
+              value={pendingUser.lastName}
             />
           </label>
           <br />
@@ -63,7 +66,7 @@ const Login = () => {
             <input
               type='email'
               onChange={handleEmailChange}
-              value={user.email}
+              value={pendingUser.email}
             />
           </label>
           <ul>
