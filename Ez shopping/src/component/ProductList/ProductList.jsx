@@ -1,7 +1,18 @@
 import React from 'react';
 import './ProductList.scss';
+import { useDispatch } from 'react-redux';
+import { updateProduct } from '../../store/slices/productsSlice';
 
 const ProductList = ({ products }) => {
+
+  const dispatch = useDispatch()
+
+  const handleQuantityChange = (e, productId)=>{
+    const quantity = e.target.value
+    dispatch(updateProduct({quantity, productId}))
+
+  }
+
   return (
     <div>
       <h2>Liste des Produits</h2>
@@ -26,7 +37,7 @@ const ProductList = ({ products }) => {
                   min='1'
                   max='10'
                   //value={quantity}
-                  //onChange={handleQuantityChange}
+                  onChange={(e)=>{handleQuantityChange(e, product.id)}}
                 />
               </div>
               <button className='product-add-to-cart'>Add to basket</button>
@@ -37,5 +48,6 @@ const ProductList = ({ products }) => {
     </div>
   );
 };
+
 
 export default ProductList;
