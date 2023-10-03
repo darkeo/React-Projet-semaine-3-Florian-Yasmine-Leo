@@ -1,14 +1,15 @@
 import "./ProductList.scss";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/slices/cartSlice";
+import { updateProduct } from "../../store/slices/productsSlice";
 
 const ProductList = ({ products }) => {
-//   const handleQuantityChange = (e, productId)=>{
-//     const quantity = e.target.value
-//     dispatch(updateProduct({quantity, productId}))
-//   }
-
   const dispatch = useDispatch();
+  const handleQuantityChange = (e, productId)=>{
+    const quantity = e.target.value
+    dispatch(updateProduct({quantity, productId}))
+  }
+
   const handleAddToCart = (product) => {
     console.log("Product added to cart:", product);
     dispatch(addItemToCart(product.id, product.title, product.description));
