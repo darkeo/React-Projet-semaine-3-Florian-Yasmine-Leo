@@ -5,8 +5,15 @@ import {
   getFromLocalStorage,
   isKeyInLocalStorage,
 } from '../../utils/localStorage';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../store/selectors/userSelectors';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Nav() {
+  const user = useSelector(selectUser);
+  const [firstName, setFirstName] = useState('Anonyme');
+
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -17,13 +24,15 @@ export default function Nav() {
     };
   };
 
-  const displayFirstName = () => {
+  useEffect(() => {
     if (isKeyInLocalStorage('user')) {
       const firstName = getFromLocalStorage('user').firstName;
-      return capitalizeFirstLetter(firstName);
+      firstName
+        ? setFirstName(capitalizeFirstLetter(firstName))
+        : setFirstName(capitalizeFirstLetter(user.firstName));
     }
-    return 'Anonyme';
-  };
+  }, [user]);
+
   return (
     <nav className='nav-menu'>
       <NavLink className='home-link' to={'/'}>
@@ -31,7 +40,7 @@ export default function Nav() {
       </NavLink>
       <div>
         <NavLink style={style} to={'/login'}>
-          {displayFirstName()}
+          {firstName}
         </NavLink>
         <NavLink style={style} to={'/cart'}>
           items:

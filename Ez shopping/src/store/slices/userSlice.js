@@ -2,6 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { addToLocalStorage } from '../../utils/localStorage';
 
 const initialState = {
+  user: {
+    firstName: '',
+    lastName: '',
+    email: '',
+  },
   pendingUser: {
     firstName: '',
     lastName: '',

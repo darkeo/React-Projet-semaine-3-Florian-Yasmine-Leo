@@ -17,6 +17,10 @@ const Login = () => {
 
   const errors = useSelector(selectErrors);
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
     dispatch(modifyPendingUser({ ...pendingUser, firstName: value }));
@@ -40,7 +44,7 @@ const Login = () => {
   const displayFirstName = () => {
     if (isKeyInLocalStorage('user')) {
       const firstName = getFromLocalStorage('user').firstName;
-      return firstName;
+      return capitalizeFirstLetter(firstName);
     }
     return;
   };
