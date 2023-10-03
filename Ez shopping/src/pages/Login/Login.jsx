@@ -8,11 +8,14 @@ import {
   selectPendingUser,
   selectUser,
 } from '../../store/selectors/userSelectors';
+import {
+  getFromLocalStorage,
+  isKeyInLocalStorage,
+} from '../../utils/localStorage';
 
 const Login = () => {
   const dispatch = useDispatch();
   const pendingUser = useSelector(selectPendingUser);
-  const user = useSelector(selectUser);
 
   const errors = useSelector(selectErrors);
   const formValidation = useSelector(selectFormValidation);
@@ -37,10 +40,18 @@ const Login = () => {
     dispatch(validateUser(pendingUser));
   };
 
+  const displayFirstName = () => {
+    if (isKeyInLocalStorage('user')) {
+      const firstName = getFromLocalStorage('user').firstName;
+      return firstName;
+    }
+    return;
+  };
+
   return (
     <>
       <div className='page'>
-        <h1>Hi {formValidation && user.firstName}</h1>
+        <h1>Hi {displayFirstName()}</h1>
         <h2>Customize your profile here</h2>
         <form className='form' onSubmit={submitForm}>
           <label>

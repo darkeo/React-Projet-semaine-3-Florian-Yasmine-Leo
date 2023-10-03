@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { addToLocalStorage } from '../../utils/localStorage';
 
 const initialState = {
   user: {
@@ -49,6 +50,7 @@ const userSlice = createSlice({
       } else {
         state.formValidation = true;
         state.user = state.pendingUser;
+        addToLocalStorage('user', state.pendingUser);
       }
     },
   },
