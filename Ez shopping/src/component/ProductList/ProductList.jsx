@@ -1,35 +1,46 @@
-import React from 'react';
-import './ProductList.scss';
+import "./ProductList.scss";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../store/slices/cartSlice";
 
 const ProductList = ({ products }) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = (product) => {
+    console.log("Product added to cart:", product);
+    dispatch(addItemToCart(product.id, product.title, product.description));
+  };
   return (
     <div>
       <h2>Liste des Produits</h2>
-      <div className='product-list'>
+      <div className="product-list">
         {products.map((product) => (
-          <div key={product.id} className='product-item'>
-            <div className='picture-view'>
-              <img src={product.image} alt='' className='product-image' />
+          <div key={product.id} className="product-item">
+            <div className="picture-view">
+              <img src={product.image} alt="" className="product-image" />
             </div>
-            <div className='product-info'>
-              <h3 className='product-title'>{product.title}</h3>
-              <p className='product-category'>{product.category}</p>
-              <p className='product-description'>{product.description}</p>
-              <h4 className='product-price'>${product.price}</h4>
-              <div className='product-quantity'>
-                <p className='product-quantity-text'>Quantity</p>
+            <div className="product-info">
+              <h3 className="product-title">{product.title}</h3>
+              <p className="product-category">{product.category}</p>
+              <p className="product-description">{product.description}</p>
+              <h4 className="product-price">${product.price}</h4>
+              <div className="product-quantity">
+                <p className="product-quantity-text">Quantity</p>
                 <input
-                  type='number'
+                  type="number"
                   id={`product-quantity-box-${product.id}`}
-                  className='product-quantity-input'
-                  name='quantity'
-                  min='1'
-                  max='10'
+                  className="product-quantity-input"
+                  name="quantity"
+                  min="1"
+                  max="10"
                   //value={quantity}
                   //onChange={handleQuantityChange}
                 />
               </div>
-              <button className='product-add-to-cart'>Add to basket</button>
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="product-add-to-cart"
+              >
+                Add to basket
+              </button>
             </div>
           </div>
         ))}
@@ -37,5 +48,4 @@ const ProductList = ({ products }) => {
     </div>
   );
 };
-
 export default ProductList;
