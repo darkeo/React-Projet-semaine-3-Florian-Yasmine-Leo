@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { selectProducts } from '../../store/selectors/productsSelectors';
 import { useState } from 'react';
 import { removeItem } from '../../store/slices/cartSlice';
+import { lazy } from 'react';
+import { addToLocalStorage } from '../../utils/localStorage';
 
 const CartList = () => {
   const cartIds = useSelector(selectCart);
@@ -20,6 +22,10 @@ const CartList = () => {
     setCartProducts(cartItems);
     console.log(cartProducts);
   }, [cartIds]);
+
+  useEffect(() => {
+    addToLocalStorage('cart', cartProducts);
+  }, [cartProducts]);
 
   const handleRemove = (productId) => {
     dispatch(removeItem(productId));
