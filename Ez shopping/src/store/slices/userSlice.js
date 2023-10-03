@@ -2,18 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { addToLocalStorage } from '../../utils/localStorage';
 
 const initialState = {
-  user: {
-    firstName: '',
-    lastName: '',
-    email: '',
-  },
   pendingUser: {
     firstName: '',
     lastName: '',
     email: '',
   },
   errors: [],
-  formValidation: false,
 };
 
 const userSlice = createSlice({
@@ -46,9 +40,8 @@ const userSlice = createSlice({
         state.errors.push(`Format d'email incorrect`);
       }
       if (state.errors.length > 0) {
-        state.formValidation = false;
+        return;
       } else {
-        state.formValidation = true;
         state.user = state.pendingUser;
         addToLocalStorage('user', state.pendingUser);
       }

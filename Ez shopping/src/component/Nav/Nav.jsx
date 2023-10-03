@@ -1,40 +1,42 @@
-import { NavLink } from "react-router-dom";
-import "./Nav.scss";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../store/selectors/userSelectors"; // Update the import path as needed
-import { selectFormValidation } from "../../store/selectors/userSelectors";
+import { NavLink } from 'react-router-dom';
+import './Nav.scss';
+
+import {
+  getFromLocalStorage,
+  isKeyInLocalStorage,
+} from '../../utils/localStorage';
 
 export default function Nav() {
-  const user = useSelector(selectUser);
-  const userValid = useSelector(selectFormValidation);
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   const style = ({ isActive }) => {
     return {
-      color: isActive ? "white" : "gray",
+      color: isActive ? 'white' : 'gray',
       //   backgroundColor: isActive ? "white" : "rgb(31, 101, 115)",
     };
   };
+
+  const displayFirstName = () => {
+    if (isKeyInLocalStorage('user')) {
+      const firstName = getFromLocalStorage('user').firstName;
+      return capitalizeFirstLetter(firstName);
+    }
+    return 'Anonyme';
+  };
   return (
-    <nav className="nav-menu">
-      <NavLink className="home-link" to={"/"}>
+    <nav className='nav-menu'>
+      <NavLink className='home-link' to={'/'}>
         EZ Shopping
       </NavLink>
       <div>
-        <NavLink style={style} to={"/login"}>
-          {userValid
-            ? `${capitalizeFirstLetter(user.firstName)} ${capitalizeFirstLetter(
-                user.lastName
-              )}`
-            : "Anonyme"}
+        <NavLink style={style} to={'/login'}>
+          {displayFirstName()}
         </NavLink>
-        <NavLink style={style} to={"/cart"}>
+        <NavLink style={style} to={'/cart'}>
           items:
         </NavLink>
-        <button>
-          darkmode
-        </button>
+        <button>darkmode</button>
       </div>
     </nav>
   );

@@ -4,9 +4,7 @@ import { modifyPendingUser, validateUser } from '../../store/slices/userSlice';
 import { useSelector } from 'react-redux';
 import {
   selectErrors,
-  selectFormValidation,
   selectPendingUser,
-  selectUser,
 } from '../../store/selectors/userSelectors';
 import {
   getFromLocalStorage,
@@ -18,7 +16,6 @@ const Login = () => {
   const pendingUser = useSelector(selectPendingUser);
 
   const errors = useSelector(selectErrors);
-  const formValidation = useSelector(selectFormValidation);
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
