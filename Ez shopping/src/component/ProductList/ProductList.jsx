@@ -3,6 +3,11 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/slices/cartSlice";
 
 const ProductList = ({ products }) => {
+//   const handleQuantityChange = (e, productId)=>{
+//     const quantity = e.target.value
+//     dispatch(updateProduct({quantity, productId}))
+//   }
+
   const dispatch = useDispatch();
   const handleAddToCart = (product) => {
     console.log("Product added to cart:", product);
@@ -32,7 +37,7 @@ const ProductList = ({ products }) => {
                   min="1"
                   max="10"
                   //value={quantity}
-                  //onChange={handleQuantityChange}
+                  onChange={(e)=>{handleQuantityChange(e, product.id)}}
                 />
               </div>
               <button
@@ -48,4 +53,5 @@ const ProductList = ({ products }) => {
     </div>
   );
 };
+
 export default ProductList;
