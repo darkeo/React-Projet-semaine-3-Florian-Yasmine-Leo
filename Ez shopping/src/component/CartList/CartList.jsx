@@ -52,7 +52,11 @@ const CartList = () => {
     dispatch(removeItem(productId));
   };
 
-  const handleDecrease = (productId) => {
+  const handleDecrease = (productId, productQuantity) => {
+    if (productQuantity <= 1) {
+      dispatch(removeItem(productId));
+      return;
+    }
     dispatch(decreaseQuantity(productId));
   };
 
@@ -77,7 +81,7 @@ const CartList = () => {
                 <div>
                   <button
                     onClick={() => {
-                      handleDecrease(product.id);
+                      handleDecrease(product.id, product.quantity);
                     }}
                   >
                     -
