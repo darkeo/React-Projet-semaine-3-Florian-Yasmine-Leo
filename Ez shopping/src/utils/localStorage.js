@@ -5,7 +5,6 @@ export const addToLocalStorage = (key, value) => {
 
 // Récupère et retourne une valeur du localStorage grâce à sa clef
 export const getFromLocalStorage = (key) => {
-  console.log(localStorage.getItem(key));
   const data = localStorage.getItem(key);
   return JSON.parse(data);
 };

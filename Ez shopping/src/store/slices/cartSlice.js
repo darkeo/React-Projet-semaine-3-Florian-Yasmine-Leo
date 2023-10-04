@@ -6,19 +6,19 @@ import {
 } from '../../utils/localStorage';
 
 const initialState = {
-  cart: [],
+  cart: isKeyInLocalStorage('cart') ? getFromLocalStorage('cart') : [],
 };
 
 const cartSlice = createSlice({
   name: 'CART',
   initialState,
   reducers: {
-    copyLocalStorageToCArt(state) {
-      if (isKeyInLocalStorage('cart')) {
-        const cartFromLocalStorage = getFromLocalStorage('cart');
-        state.cart = cartFromLocalStorage;
-      }
-    },
+    // copyLocalStorageToCArt(state) {
+    //   if (isKeyInLocalStorage('cart')) {
+    //     const cartFromLocalStorage = getFromLocalStorage('cart');
+    //     state.cart = cartFromLocalStorage;
+    //   }
+    // },
     addItemToCart(state, action) {
       const { id, quantity } = action.payload;
 
@@ -73,11 +73,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const {
-  addItemToCart,
-  removeItem,
-  copyLocalStorageToCArt,
-  decreaseQuantity,
-  increaseQuantity,
-} = cartSlice.actions;
+export const { addItemToCart, removeItem, decreaseQuantity, increaseQuantity } =
+  cartSlice.actions;
 export default cartSlice;

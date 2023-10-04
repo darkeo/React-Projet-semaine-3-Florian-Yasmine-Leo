@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { selectProducts } from '../../store/selectors/productsSelectors';
 import { useState } from 'react';
 import {
-  copyLocalStorageToCArt,
   decreaseQuantity,
   increaseQuantity,
   removeItem,
@@ -33,22 +32,21 @@ const CartList = () => {
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
-    // Si localStorage contient des produits >> copier le localStorage dans le cart de Redux
-    dispatch(copyLocalStorageToCArt());
+    const ids = cart.map((product) => product.id);
 
-    console.log(cart);
+    // Filter the products based on the IDs from the cart
+    const cartItems = products.filter((product) => ids.includes(product.id));
 
-    const ids = cart.map((product) => {
-      return product.id;
+    // Update the quantities for each cart item from the cart data
+    const cartItemsWithQuantities = cartItems.map((product) => {
+      const cartItem = cart.find((item) => item.id === product.id);
+      return { ...product, quantity: cartItem ? cartItem.quantity : 0 };
     });
-    console.log(ids);
-    console.log(products);
-    const cartItems = products.filter((product) => {
-      return ids.includes(product.id);
-    });
-    console.log(cartItems);
-    setCartProducts(cartItems);
-  }, []);
+
+    console.log(cartItemsWithQuantities);
+
+    setCartProducts(cartItemsWithQuantities);
+  }, [cart]);
 
   const handleRemove = (productId) => {
     dispatch(removeItem(productId));
@@ -60,15 +58,6 @@ const CartList = () => {
 
   const handleIncrease = (productId) => {
     dispatch(increaseQuantity(productId));
-  };
-
-  const getQuantityFromCart = (productId) => {
-    const filteredProduct = cart.filter((product) => {
-      return product.id === productId;
-    });
-    console.log(filteredProduct);
-    console.log(filteredProduct[0].quantity);
-    return filteredProduct[0].quantity;
   };
 
   return (
@@ -93,7 +82,7 @@ const CartList = () => {
                   >
                     -
                   </button>
-                  <span>{getQuantityFromCart(product.id)}</span>
+                  <span>{product.quantity}</span>
                   <button
                     onClick={() => {
                       handleIncrease(product.id);
