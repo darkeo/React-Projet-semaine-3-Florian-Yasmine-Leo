@@ -9,8 +9,16 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart(state, action) {
-      const productId = action.payload;
-      console.log(productId);
+      const productId = action.payload.id;
+
+      const filteredProduct = state.cart.filter((product) => {
+        return product === productId;
+      });
+
+      console.log(filteredProduct);
+      if (filteredProduct.length === 0) {
+        filteredProduct.push(action.payload);
+      }
       if (!state.cart.includes(productId)) {
         state.cart.push(productId);
       }

@@ -17,3 +17,13 @@ export const isKeyInLocalStorage = (key) => {
   }
   return false;
 };
+
+export const addToLocalStorageFromMiddleware = (key, value) => {
+  const existingData = JSON.parse(localStorage.getItem(key)) || [];
+  const newData = [...existingData, value];
+  if (!existingData.includes(value)) {
+    localStorage.setItem(key, JSON.stringify(newData));
+    return;
+  }
+  return;
+};

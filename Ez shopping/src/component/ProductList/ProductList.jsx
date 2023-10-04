@@ -12,7 +12,7 @@ const ProductList = ({ products }) => {
 
   const handleAddToCart = (product) => {
     console.log('Product added to cart:', product.id);
-    dispatch(addItemToCart(product.id));
+    dispatch(addItemToCart({ id: product.id, quantity: product.quantity }));
   };
   return (
     <div>
