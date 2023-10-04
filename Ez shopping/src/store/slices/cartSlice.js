@@ -9,22 +9,18 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart(state, action) {
-      const productId = action.payload.id;
+      const { id, quantity } = action.payload;
 
-      const filteredProduct = state.cart.filter((product) => {
-        return product === productId;
-      });
+      // Recherche le produit dans le panier par son id
+      const existingProduct = state.cart.find((item) => item.id === id);
 
-      console.log(filteredProduct);
-      if (filteredProduct.length === 0) {
-        filteredProduct.push(action.payload);
+      if (existingProduct) {
+        // Si le produit existe déjà dans le panier, met à jour la quantité
+        existingProduct.quantity += quantity;
+      } else {
+        // Si le produit n'existe pas dans le panier, l'ajoute
+        state.cart.push({ id, quantity });
       }
-      if (!state.cart.includes(productId)) {
-        state.cart.push(productId);
-      }
-
-      // const item = state.cart.find((item) => item.id === action.payload.id);
-      // item ? item.quantity++ : state.cart.push(item.id);
     },
     removeItem(state, action) {
       const productId = action.payload;
