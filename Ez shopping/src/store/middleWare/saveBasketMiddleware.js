@@ -7,11 +7,11 @@ import cartSlice from '../slices/cartSlice';
 
 const saveBasketMiddleware = (store) => (next) => (action) => {
   const nextAction = next(action);
-  if (action.type === cartSlice.actions.addItemToCart.toString()) {
-    const productId = action.payload;
+  //   if (action.type === cartSlice.actions.addItemToCart.toString()) {
+  //     const productId = action.payload;
 
-    addToLocalStorageFromMiddleware('cart', productId);
-  }
+  //     addToLocalStorageFromMiddleware('cart', productId);
+  //   }
 
   return nextAction;
 };

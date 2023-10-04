@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { addToLocalStorage } from '../../utils/localStorage';
 
 const initialState = {
   cart: [],
@@ -21,6 +22,9 @@ const cartSlice = createSlice({
         // Si le produit n'existe pas dans le panier, l'ajoute
         state.cart.push({ id, quantity });
       }
+
+      // on save le panier dans le localStorage
+      addToLocalStorage('cart', state.cart);
     },
     removeItem(state, action) {
       const productId = action.payload;
