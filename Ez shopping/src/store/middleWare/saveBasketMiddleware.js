@@ -8,7 +8,8 @@ const saveBasketMiddleware = (store) => (next) => (action) => {
     action.type === cartSlice.actions.addItemToCart.toString() ||
     action.type === cartSlice.actions.decreaseQuantity.toString() ||
     action.type === cartSlice.actions.increaseQuantity.toString() ||
-    action.type === cartSlice.actions.removeItem.toString()
+    action.type === cartSlice.actions.removeItem.toString() ||
+    action.type === cartSlice.actions.removeAllItems.toString()
   ) {
     console.log(cart);
     addToLocalStorage('cart', cart);
