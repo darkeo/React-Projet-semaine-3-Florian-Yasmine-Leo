@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addToLocalStorage } from '../../utils/localStorage';
+import {
+  addToLocalStorage,
+  getFromLocalStorage,
+  isKeyInLocalStorage,
+} from '../../utils/localStorage';
 
 const initialState = {
   cart: [],
@@ -9,34 +13,71 @@ const cartSlice = createSlice({
   name: 'CART',
   initialState,
   reducers: {
+    copyLocalStorageToCArt(state) {
+      if (isKeyInLocalStorage('cart')) {
+        const cartFromLocalStorage = getFromLocalStorage('cart');
+        state.cart = cartFromLocalStorage;
+      }
+    },
     addItemToCart(state, action) {
       const { id, quantity } = action.payload;
 
-      // Recherche le produit dans le panier par son id
-      const existingProduct = state.cart.find((item) => item.id === id);
+      // Check if the product with the given id already exists in the cart
+      const existingProduct = state.cart.find((product) => product.id === id);
 
       if (existingProduct) {
-        // Si le produit existe déjà dans le panier, met à jour la quantité
-        existingProduct.quantity += quantity;
-      } else {
-        // Si le produit n'existe pas dans le panier, l'ajoute
-        state.cart.push({ id, quantity });
-      }
+        // If the product exists, create a new cart array with updated quantity
+        const updatedCart = state.cart.map((product) =>
+          product.id === id
+            ? { ...product, quantity: product.quantity + quantity }
+            : product
+        );
 
-      // on save le panier dans le localStorage
-      addToLocalStorage('cart', state.cart);
+        return { ...state, cart: updatedCart };
+      } else {
+        // If the product doesn't exist, create a new cart array with the added product
+        const newCart = [...state.cart, action.payload];
+        return { ...state, cart: newCart };
+      }
+    },
+    decreaseQuantity(state, action) {
+      const productId = action.payload;
+      const newCart = state.cart.map((product) => {
+        if (product.id === productId) {
+          if (product.quantity <= 0) {
+            return product;
+          }
+          return { ...product, quantity: product.quantity - 1 };
+        }
+        return product;
+      });
+      state.cart = newCart;
+    },
+    increaseQuantity(state, action) {
+      const productId = action.payload;
+      const newCart = state.cart.map((product) => {
+        if (product.id === productId) {
+          return { ...product, quantity: product.quantity + 1 };
+        }
+        return product;
+      });
+      state.cart = newCart;
     },
     removeItem(state, action) {
       const productId = action.payload;
-      if (state.cart.includes(productId)) {
-        const newCart = state.cart.filter((id) => {
-          return id !== productId;
-        });
-        state.cart = newCart;
-      }
+      const newCart = state.cart.filter((product) => {
+        return !product.id === productId;
+      });
+      state.cart = newCart;
     },
   },
 });
 
-export const { addItemToCart, removeItem } = cartSlice.actions;
+export const {
+  addItemToCart,
+  removeItem,
+  copyLocalStorageToCArt,
+  decreaseQuantity,
+  increaseQuantity,
+} = cartSlice.actions;
 export default cartSlice;

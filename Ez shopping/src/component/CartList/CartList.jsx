@@ -4,58 +4,71 @@ import './CartList.scss';
 import { useEffect } from 'react';
 import { selectProducts } from '../../store/selectors/productsSelectors';
 import { useState } from 'react';
-import { removeItem } from '../../store/slices/cartSlice';
+import {
+  copyLocalStorageToCArt,
+  decreaseQuantity,
+  increaseQuantity,
+  removeItem,
+} from '../../store/slices/cartSlice';
 import { lazy } from 'react';
-import { addToLocalStorage } from '../../utils/localStorage';
+import {
+  addToLocalStorage,
+  getFromLocalStorage,
+  isKeyInLocalStorage,
+} from '../../utils/localStorage';
 
 const CartList = () => {
-  const cartIds = useSelector(selectCart);
-  const products = useSelector(selectProducts);
+  const cart = useSelector(selectCart);
+  const products = getFromLocalStorage('products') || [];
   const dispatch = useDispatch();
+  const localStorageCart = () => {
+    if (isKeyInLocalStorage('cart')) {
+      return getFromLocalStorage('cart');
+    }
+    return false;
+  };
+
+  console.log(localStorageCart());
 
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
-    const cartItems = products.filter((product) => {
-      return cartIds.includes(product.id);
-    });
-    setCartProducts(cartItems);
-    console.log(cartProducts);
-  }, [cartIds]);
+    // Si localStorage contient des produits >> copier le localStorage dans le cart de Redux
+    dispatch(copyLocalStorageToCArt());
 
-  useEffect(() => {
-    addToLocalStorage('cart', cartProducts);
-  }, [cartProducts]);
+    console.log(cart);
+
+    const ids = cart.map((product) => {
+      return product.id;
+    });
+    console.log(ids);
+    console.log(products);
+    const cartItems = products.filter((product) => {
+      return ids.includes(product.id);
+    });
+    console.log(cartItems);
+    setCartProducts(cartItems);
+  }, []);
 
   const handleRemove = (productId) => {
     dispatch(removeItem(productId));
   };
 
-  const handleDecrease = (product) => {
-    const newCartProducts = cartProducts.map((element) => {
-      if (element === product) {
-        if (element.quantity === 1) {
-          dispatch(removeItem(element.id));
-        }
-        return { ...element, quantity: element.quantity - 1 };
-      } else {
-        return element;
-      }
-    });
-    console.log(newCartProducts);
-    setCartProducts(newCartProducts);
+  const handleDecrease = (productId) => {
+    dispatch(decreaseQuantity(productId));
   };
 
-  const handleIncrease = (product) => {
-    const newCartProducts = cartProducts.map((element) => {
-      if (element === product) {
-        return { ...element, quantity: element.quantity + 1 };
-      } else {
-        return element;
-      }
+  const handleIncrease = (productId) => {
+    dispatch(increaseQuantity(productId));
+  };
+
+  const getQuantityFromCart = (productId) => {
+    const filteredProduct = cart.filter((product) => {
+      return product.id === productId;
     });
-    console.log(newCartProducts);
-    setCartProducts(newCartProducts);
+    console.log(filteredProduct);
+    console.log(filteredProduct[0].quantity);
+    return filteredProduct[0].quantity;
   };
 
   return (
@@ -75,15 +88,15 @@ const CartList = () => {
                 <div>
                   <button
                     onClick={() => {
-                      handleDecrease(product);
+                      handleDecrease(product.id);
                     }}
                   >
                     -
                   </button>
-                  <span>{product.quantity}</span>
+                  <span>{getQuantityFromCart(product.id)}</span>
                   <button
                     onClick={() => {
-                      handleIncrease(product);
+                      handleIncrease(product.id);
                     }}
                   >
                     +
