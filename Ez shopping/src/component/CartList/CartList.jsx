@@ -2,16 +2,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCart } from '../../store/selectors/cartSelectors';
 import './CartList.scss';
 import { useEffect } from 'react';
-import { selectProducts } from '../../store/selectors/productsSelectors';
 import { useState } from 'react';
 import {
   decreaseQuantity,
   increaseQuantity,
+  removeAllItems,
   removeItem,
 } from '../../store/slices/cartSlice';
-import { lazy } from 'react';
 import {
-  addToLocalStorage,
   getFromLocalStorage,
   isKeyInLocalStorage,
 } from '../../utils/localStorage';
@@ -64,6 +62,10 @@ const CartList = () => {
     dispatch(increaseQuantity(productId));
   };
 
+  const handleRemoveAll = () => {
+    dispatch(removeAllItems());
+  };
+
   return (
     <div>
       <h2>Votre panier</h2>
@@ -107,6 +109,13 @@ const CartList = () => {
           );
         })}
       </div>
+      <button
+        onClick={() => {
+          handleRemoveAll();
+        }}
+      >
+        Remove All
+      </button>
     </div>
   );
 };
