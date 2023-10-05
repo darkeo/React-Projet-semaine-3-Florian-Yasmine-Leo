@@ -74,7 +74,7 @@ export default function Nav() {
           >
             {productsNumber}
           </span>
-          Panier
+          <span>Panier</span>
         </NavLink>
         <button
           onClick={() => {
