@@ -10,12 +10,12 @@ import { selectUser } from "../../store/selectors/userSelectors";
 import { useEffect } from "react";
 import { useState } from "react";
 import { switchMode } from "../../store/slices/darkModeSlice";
-import { selectCart } from '../../store/selectors/cartSelectors';
+import { selectCart } from "../../store/selectors/cartSelectors";
 
 import { BiSolidMoon } from "react-icons/bi";
 import { BsSunFill } from "react-icons/bs";
-import { BsBasket2Fill } from 'react-icons/bs';
-import { ImUser } from 'react-icons/im';
+import { BsBasket2Fill } from "react-icons/bs";
+import { ImUser } from "react-icons/im";
 
 export default function Nav() {
   const dispatch = useDispatch();
@@ -31,12 +31,11 @@ export default function Nav() {
   }
   const style = ({ isActive }) => {
     return {
-      color: isActive ? 'white' : 'gray',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      //   backgroundColor: isActive ? "white" : "rgb(31, 101, 115)",
+      color: isActive ? "white" : "gray",
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
     };
   };
 
@@ -66,27 +65,18 @@ export default function Nav() {
         EZ Shopping
       </NavLink>
       <div>
-        <NavLink style={style} to={'/login'}>
-          <ImUser style={{ marginRight: '5px' }} />
-          {firstName}
+        <NavLink style={style} to={"/login"}>
+          <div className="button-user-box">
+            <ImUser size={30} />
+            <span>{firstName}</span>
+          </div>
         </NavLink>
-        <NavLink style={style} to={'/cart'}>
-          <BsBasket2Fill style={{ marginRight: '5px' }} />
-          <span
-            style={{
-              display: 'block',
-              textAlign: 'center',
-              backgroundColor: 'red',
-              marginRight: '5px',
-              borderRadius: '50%',
-              height: '30px',
-              width: '30px',
-              marginLeft: '5px',
-            }}
-          >
-            {productsNumber}
-          </span>
-          <span>Panier</span>
+        <NavLink style={style} to={"/cart"}>
+          <div style={{ position: "relative" }} className="button-cart-box">
+            <BsBasket2Fill size={30} className="cart-icon" />
+            <span className="cart-counter">{productsNumber}</span>
+          </div>
+          {/* <span>Panier</span> */}
         </NavLink>
         <div
           onClick={() => {
