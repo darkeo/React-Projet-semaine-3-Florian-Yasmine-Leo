@@ -1,5 +1,7 @@
 import "./ProductList.scss";
 import { BsCart2 } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { selectDarkMode } from "../../store/selectors/darkModeSelectors";
 
 const Product = ({
   id,
@@ -16,11 +18,21 @@ const Product = ({
   handleRemove,
   isInCart,
 }) => {
+  const darkMode = useSelector(selectDarkMode);
+
   return (
-    <div className="product-item">
+    <div className={darkMode ? "dark product-item" : "light product-item"}>
       {!isInCart ? (
         <div className="product-box-category">
-          <p className="product-category">{category}</p>
+          <p
+            className={
+              darkMode
+                ? "dark-cat-p product-category"
+                : "light-cat-p product-category"
+            }
+          >
+            {category}
+          </p>
         </div>
       ) : null}
 
@@ -28,25 +40,64 @@ const Product = ({
         <img src={image} alt={title} className="product-image" />
       </div>
       <div className="product-info">
-        <h3 className="product-title">{title}</h3>
-        <p className="product-description">{description}</p>
-        <h4 className="product-price">${price}</h4>
+        <h3
+          className={
+            darkMode ? "dark-title product-title" : "light-title product-title"
+          }
+        >
+          {title}
+        </h3>
+        <p
+          className={
+            darkMode
+              ? "dark-description product-description"
+              : "light-description product-description"
+          }
+        >
+          {description}
+        </p>
+        <h4
+          className={
+            darkMode ? "dark-price product-price" : "light-price product-price"
+          }
+        >
+          ${price}
+        </h4>
 
         {!isInCart ? (
           <>
             <div className="product-quantity">
-              <p className="product-quantity-text">Quantity</p>
+              <p
+                className={
+                  darkMode
+                    ? "dark-qnt-text product-quantity-text"
+                    : "light-qnt-text product-quantity-text"
+                }
+              >
+                Quantity
+              </p>
               <input
                 type="number"
                 id={`product-quantity-box-${id}`}
-                className="product-quantity-input"
+                className={
+                  darkMode
+                    ? "dark-pro-qua-inp product-quantity-input"
+                    : "light-pro-qua-inp product-quantity-input"
+                }
                 name="quantity"
                 min="1"
                 max="10"
                 onChange={handleQuantityChange}
               />
             </div>
-            <button onClick={handleAddToCart} className="product-add-to-cart">
+            <button
+              onClick={handleAddToCart}
+              className={
+                darkMode
+                  ? "dark-add product-add-to-cart"
+                  : "light-add product-add-to-cart"
+              }
+            >
               <p>Add to basket</p>
               <BsCart2 style={{ width: 20, height: 20 }} />
             </button>
