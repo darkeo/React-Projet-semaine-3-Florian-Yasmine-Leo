@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  getFromLocalStorage,
+  isKeyInLocalStorage,
+} from '../../utils/localStorage';
 
 const initialState = {
-  darkMode: false,
+  darkMode: isKeyInLocalStorage('darkMode')
+    ? getFromLocalStorage('darkMode')
+    : false,
 };
 
 const darkModeSlice = createSlice({
