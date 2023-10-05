@@ -1,8 +1,9 @@
-import "./ProductList.scss";
-import { useDispatch } from "react-redux";
-import { addItemToCart } from "../../store/slices/cartSlice";
-import { updateProduct } from "../../store/slices/productsSlice";
-import Product from "./Product";
+/* eslint-disable react/prop-types */
+import './ProductList.scss';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../../store/slices/cartSlice';
+import { updateProduct } from '../../store/slices/productsSlice';
+import Product from './Product';
 
 const ProductList = ({ products }) => {
   const dispatch = useDispatch();
@@ -12,12 +13,12 @@ const ProductList = ({ products }) => {
   };
 
   const handleAddToCart = (product) => {
-    console.log("Product added to cart:", product.id);
+    console.log('Product added to cart:', product.id);
     dispatch(addItemToCart({ id: product.id, quantity: product.quantity }));
   };
   return (
     <div>
-      <div className="product-list">
+      <div className='product-list'>
         {products.map((product) => (
           <Product
             key={product.id}

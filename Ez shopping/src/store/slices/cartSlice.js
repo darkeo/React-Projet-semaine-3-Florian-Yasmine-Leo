@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  addToLocalStorage,
   getFromLocalStorage,
   isKeyInLocalStorage,
 } from '../../utils/localStorage';
@@ -29,7 +28,11 @@ const cartSlice = createSlice({
         // If the product exists, create a new cart array with updated quantity
         const updatedCart = state.cart.map((product) =>
           product.id === id
-            ? { ...product, quantity: product.quantity + quantity }
+            ? {
+                ...product,
+                quantity:
+                  quantity > 0 ? product.quantity + quantity : product.quantity,
+              }
             : product
         );
 
@@ -70,7 +73,7 @@ const cartSlice = createSlice({
       });
       state.cart = newCart;
     },
-    removeAllItems(state, action) {
+    removeAllItems(state) {
       state.cart = [];
     },
   },

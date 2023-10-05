@@ -36,8 +36,8 @@ const Product = ({
         </div>
       ) : null}
 
-      <div className="picture-view">
-        <img src={image} alt={title} className="product-image" />
+      <div className='picture-view'>
+        <img src={image} alt={title} className='product-image' />
       </div>
       <div className="product-info">
         <h3
@@ -77,7 +77,7 @@ const Product = ({
                 Quantity
               </p>
               <input
-                type="number"
+                type='number'
                 id={`product-quantity-box-${id}`}
                 className={
                   darkMode
@@ -103,7 +103,7 @@ const Product = ({
             </button>
           </>
         ) : (
-          <div className="product-quantity-cart ">
+          <div className='product-quantity-cart '>
             <div>
               <button
                 // onClick={() => {
@@ -128,7 +128,7 @@ const Product = ({
               //     handleRemove(product.id);
               //   }}
               onClick={handleRemove}
-              className="product-remove-item"
+              className='product-remove-item'
             >
               Remove
             </button>

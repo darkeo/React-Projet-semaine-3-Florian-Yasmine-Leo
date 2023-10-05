@@ -10,14 +10,20 @@ import { selectUser } from "../../store/selectors/userSelectors";
 import { useEffect } from "react";
 import { useState } from "react";
 import { switchMode } from "../../store/slices/darkModeSlice";
+import { selectCart } from '../../store/selectors/cartSelectors';
 
 import { BiSolidMoon } from "react-icons/bi";
 import { BsSunFill } from "react-icons/bs";
+import { BsBasket2Fill } from 'react-icons/bs';
+import { ImUser } from 'react-icons/im';
 
 export default function Nav() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const cart = useSelector(selectCart);
+  console.log(cart);
   const [firstName, setFirstName] = useState("Anonyme");
+  const [productsNumber, setProductsNumber] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
 
   function capitalizeFirstLetter(string) {
@@ -25,7 +31,11 @@ export default function Nav() {
   }
   const style = ({ isActive }) => {
     return {
-      color: isActive ? "white" : "gray",
+      color: isActive ? 'white' : 'gray',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
       //   backgroundColor: isActive ? "white" : "rgb(31, 101, 115)",
     };
   };
@@ -39,6 +49,12 @@ export default function Nav() {
     }
   }, [user]);
 
+  useEffect(() => {
+    console.log(cart);
+    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+    setProductsNumber(total);
+  }, [cart]);
+
   const toggleDarkMode = () => {
     dispatch(switchMode());
     setIsDarkMode(!isDarkMode); // Toggle the dark mode state
@@ -50,11 +66,27 @@ export default function Nav() {
         EZ Shopping
       </NavLink>
       <div>
-        <NavLink style={style} to={"/login"}>
+        <NavLink style={style} to={'/login'}>
+          <ImUser style={{ marginRight: '5px' }} />
           {firstName}
         </NavLink>
-        <NavLink style={style} to={"/cart"}>
-          Panier
+        <NavLink style={style} to={'/cart'}>
+          <BsBasket2Fill style={{ marginRight: '5px' }} />
+          <span
+            style={{
+              display: 'block',
+              textAlign: 'center',
+              backgroundColor: 'red',
+              marginRight: '5px',
+              borderRadius: '50%',
+              height: '30px',
+              width: '30px',
+              marginLeft: '5px',
+            }}
+          >
+            {productsNumber}
+          </span>
+          <span>Panier</span>
         </NavLink>
         <div
           onClick={() => {

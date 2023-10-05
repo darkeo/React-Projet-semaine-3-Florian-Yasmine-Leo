@@ -6,7 +6,6 @@ import { useState } from 'react';
 import {
   decreaseQuantity,
   increaseQuantity,
-  removeAllItems,
   removeItem,
 } from '../../store/slices/cartSlice';
 import {
