@@ -9,19 +9,9 @@ import { selectDarkMode } from './store/selectors/darkModeSelectors';
 function App() {
   const darkMode = useSelector(selectDarkMode);
 
-  const darkModeStyle = {
-    backGroundColor: '#333',
-    color: 'white',
-  };
-
-  const lightModeStyle = {
-    backGroundColor: 'white',
-    color: '#333',
-  };
-
   return (
     <>
-      <main style={darkMode ? darkModeStyle : lightModeStyle}>
+      <main className={darkMode ? 'darkMode' : 'lightMode'}>
         <header>
           <Nav />
         </header>
