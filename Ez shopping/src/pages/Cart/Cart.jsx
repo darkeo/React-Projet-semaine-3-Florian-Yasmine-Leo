@@ -8,6 +8,7 @@ import {
   getFromLocalStorage,
   isKeyInLocalStorage,
 } from '../../utils/localStorage';
+import { capitalizeFirstLetter } from '../../utils/capitalize';
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -28,12 +29,17 @@ export default function Cart() {
       {cart.length > 0 ? (
         <h1>
           {user().firstName.length > 0
-            ? `${user().firstName},`
-            : `${user().firstName}`}{' '}
+            ? `${capitalizeFirstLetter(user().firstName)},`
+            : `${capitalizeFirstLetter(user().firstName)}`}{' '}
           voici votre panier
         </h1>
       ) : (
-        <h1>{`${user().firstName},`} votre Panier est vide</h1>
+        <h1>
+          {user().firstName.length > 0
+            ? `${capitalizeFirstLetter(user().firstName)},`
+            : `${capitalizeFirstLetter(user().firstName)}`}{' '}
+          votre panier est vide
+        </h1>
       )}
       {cart.length > 0 && (
         <button
