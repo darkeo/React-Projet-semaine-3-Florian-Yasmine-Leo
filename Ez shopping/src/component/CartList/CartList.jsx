@@ -1,26 +1,27 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCart } from '../../store/selectors/cartSelectors';
-import './CartList.scss';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { selectCart } from "../../store/selectors/cartSelectors";
+import "../ProductList/ProductList.scss";
+import { useEffect } from "react";
+import { useState } from "react";
 import {
   decreaseQuantity,
   increaseQuantity,
   removeAllItems,
   removeItem,
-} from '../../store/slices/cartSlice';
+} from "../../store/slices/cartSlice";
 import {
   getFromLocalStorage,
   isKeyInLocalStorage,
-} from '../../utils/localStorage';
+} from "../../utils/localStorage";
+import Product from "../ProductList/Product";
 
 const CartList = () => {
   const cart = useSelector(selectCart);
-  const products = getFromLocalStorage('products') || [];
+  const products = getFromLocalStorage("products") || [];
   const dispatch = useDispatch();
   const localStorageCart = () => {
-    if (isKeyInLocalStorage('cart')) {
-      return getFromLocalStorage('cart');
+    if (isKeyInLocalStorage("cart")) {
+      return getFromLocalStorage("cart");
     }
     return false;
   };
@@ -68,44 +69,27 @@ const CartList = () => {
 
   return (
     <div>
-      <h2>Votre panier</h2>
-      <div>
+      <div className="product-list">
         {cartProducts.map((product, index) => {
           return (
-            <div key={`${product.id}${index}`}>
-              <div>
-                <img src={product.image} alt={product.title} />
-              </div>
-              <div>
-                <h2>{product.title}</h2>
-                <p>{product.description}</p>
-                <p>{product.price} €</p>
-                <div>
-                  <button
-                    onClick={() => {
-                      handleDecrease(product.id, product.quantity);
-                    }}
-                  >
-                    -
-                  </button>
-                  <span>{product.quantity}</span>
-                  <button
-                    onClick={() => {
-                      handleIncrease(product.id);
-                    }}
-                  >
-                    +
-                  </button>
-                </div>{' '}
-                <button
-                  onClick={() => {
-                    handleRemove(product.id);
-                  }}
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
+            <Product
+              isInCart={true}
+              key={`${product.id}${index}`}
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              quantity={product.quantity}
+              handleDecrease={() => {
+                handleDecrease(product.id, product.quantity);
+              }}
+              handleIncrease={() => {
+                handleIncrease(product.id);
+              }}
+              handleRemove={() => {
+                handleRemove(product.id);
+              }}
+            />
           );
         })}
       </div>
