@@ -28,7 +28,7 @@ export default function Cart() {
       {cart.length > 0 ? (
         <h1>{user().firstName}, voici votre panier</h1>
       ) : (
-        <h1>{user().firstName}, Votre Panier est vide</h1>
+        <h1>{user().firstName}, votre Panier est vide</h1>
       )}
       {cart.length > 0 && (
         <button

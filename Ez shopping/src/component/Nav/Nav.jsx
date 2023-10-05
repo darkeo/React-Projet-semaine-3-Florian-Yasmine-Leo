@@ -11,6 +11,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { switchMode } from '../../store/slices/darkModeSlice';
 import { selectCart } from '../../store/selectors/cartSelectors';
+import { BsBasket2Fill } from 'react-icons/bs';
+import { ImUser } from 'react-icons/im';
 
 export default function Nav() {
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ export default function Nav() {
       color: isActive ? 'white' : 'gray',
       display: 'flex',
       flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
       //   backgroundColor: isActive ? "white" : "rgb(31, 101, 115)",
     };
   };
@@ -58,9 +62,11 @@ export default function Nav() {
       </NavLink>
       <div>
         <NavLink style={style} to={'/login'}>
+          <ImUser style={{ marginRight: '5px' }} />
           {firstName}
         </NavLink>
         <NavLink style={style} to={'/cart'}>
+          <BsBasket2Fill style={{ marginRight: '5px' }} />
           <span
             style={{
               display: 'block',
@@ -70,6 +76,7 @@ export default function Nav() {
               borderRadius: '50%',
               height: '30px',
               width: '30px',
+              marginLeft: '5px',
             }}
           >
             {productsNumber}
