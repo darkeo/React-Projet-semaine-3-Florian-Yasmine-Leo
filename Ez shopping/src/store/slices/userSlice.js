@@ -35,8 +35,14 @@ const userSlice = createSlice({
       if (newUser.firstName.length === 0) {
         state.errors.push('Veuillez entrer votre prénom');
       }
+      if (newUser.firstName.length > 30) {
+        state.errors.push('Le champs "Prénom" est limité à 30 caractères');
+      }
       if (newUser.lastName.length === 0) {
         state.errors.push('Veuillez entrer votre nom');
+      }
+      if (newUser.lastName.length > 30) {
+        state.errors.push('Le champs "Nom" est limité à 30 caractères');
       }
       if (newUser.email.length === 0) {
         state.errors.push('Veuillez entrer votre adresse email');

@@ -68,7 +68,7 @@ const CartList = () => {
 
   return (
     <>
-      <div>
+      <div className='cartPage'>
         <h2>Votre panier</h2>
         <div>
           {cartProducts.map((product, index) => {

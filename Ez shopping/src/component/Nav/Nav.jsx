@@ -49,7 +49,7 @@ export default function Nav() {
           {firstName}
         </NavLink>
         <NavLink style={style} to={'/cart'}>
-          items:
+          Panier
         </NavLink>
         <button
           onClick={() => {

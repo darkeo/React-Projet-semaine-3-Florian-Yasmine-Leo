@@ -21,7 +21,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div className='homePage'>
       <h1>HomePage</h1>
       <ProductList products={products} />
     </div>
