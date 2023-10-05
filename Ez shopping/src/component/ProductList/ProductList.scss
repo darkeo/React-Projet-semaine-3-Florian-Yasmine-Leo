@@ -4,9 +4,11 @@
 .dark {
   background: $surface-mixed-200;
 }
+
 .dark-cat-p {
   color: $surface-mixed-100;
 }
+
 .dark-title {
   color: white;
 }
@@ -22,9 +24,11 @@
 .dark-qnt-text {
   color: white;
 }
+
 .dark-pro-qua-inp {
   border: 1px solid $primary-500;
 }
+
 .dark-add {
   background: $primary-500;
   color: $surface-mixed-100;
@@ -42,9 +46,11 @@
   background: white;
   box-shadow: 1px 2px 9px $surface-mixed-600;
 }
-.light-cat-p{
+
+.light-cat-p {
   color: white;
 }
+
 .light-description {
   color: $surface-mixed-600;
 }
@@ -210,13 +216,56 @@
 .product-quantity-cart {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
+  align-items: center;
+}
+
+.product-buttons-quantity {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  outline: none;
+}
+
+.dark-pro-but-qua {
+  span {
+    color: white;
+  }
+
+  button {
+    background: $primary-500;
+    color: $surface-mixed-100;
+  }
 }
 
 .product-remove-item {
+  border-radius: 20px;
+  outline: none;
   width: 90%;
+  // background: #b00020;
+}
+.dark-remove-item{
+  background: #cf6679;
+  
+}
+.dark-remove-item:hover{
+  color: #cf6679;
+  border: 1px solid #cf6679;
+  background: $surface-mixed-200;
+  
 }
 
+.light-remove-item{
+  background: #b00020;
+
+}
+.light-remove-item:hover{
+  
+  color: #b00020;
+  border: 1px solid #b00020;
+  background: white;
+}
 
 @media (max-width: 480px) {
   .product-item {
