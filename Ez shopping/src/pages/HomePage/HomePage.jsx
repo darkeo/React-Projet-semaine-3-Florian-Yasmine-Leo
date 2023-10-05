@@ -14,14 +14,14 @@ const HomePage = () => {
   console.log(products);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch('https://fakestoreapi.com/products')
       .then((res) => res.json())
       .then((data) => dispatch(getProducts(data)))
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh' }}>
       <h1> Liste des Produits</h1>
       <ProductList products={products} />
     </div>

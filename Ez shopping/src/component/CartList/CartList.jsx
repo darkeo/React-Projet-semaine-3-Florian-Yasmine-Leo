@@ -1,27 +1,27 @@
-import { useDispatch, useSelector } from "react-redux";
-import { selectCart } from "../../store/selectors/cartSelectors";
-import "../ProductList/ProductList.scss";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCart } from '../../store/selectors/cartSelectors';
+import '../ProductList/ProductList.scss';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import {
   decreaseQuantity,
   increaseQuantity,
   removeAllItems,
   removeItem,
-} from "../../store/slices/cartSlice";
+} from '../../store/slices/cartSlice';
 import {
   getFromLocalStorage,
   isKeyInLocalStorage,
-} from "../../utils/localStorage";
-import Product from "../ProductList/Product";
+} from '../../utils/localStorage';
+import Product from '../ProductList/Product';
 
 const CartList = () => {
   const cart = useSelector(selectCart);
-  const products = getFromLocalStorage("products") || [];
+  const products = getFromLocalStorage('products') || [];
   const dispatch = useDispatch();
   const localStorageCart = () => {
-    if (isKeyInLocalStorage("cart")) {
-      return getFromLocalStorage("cart");
+    if (isKeyInLocalStorage('cart')) {
+      return getFromLocalStorage('cart');
     }
     return false;
   };
@@ -63,13 +63,9 @@ const CartList = () => {
     dispatch(increaseQuantity(productId));
   };
 
-  const handleRemoveAll = () => {
-    dispatch(removeAllItems());
-  };
-
   return (
     <div>
-      <div className="product-list">
+      <div className='product-list'>
         {cartProducts.map((product, index) => {
           return (
             <Product
@@ -93,8 +89,7 @@ const CartList = () => {
           );
         })}
       </div>
-      </div>
-      
+    </div>
   );
 };
 
