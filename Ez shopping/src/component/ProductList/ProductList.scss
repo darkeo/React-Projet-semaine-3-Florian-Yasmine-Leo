@@ -103,9 +103,25 @@
 }
 
 .product-add-to-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 90%;
+  margin: 0 auto;
   background-color: rgb(34, 162, 166);
+  border: 2px solid rgb(34, 162, 166); /* Add a red border on hover */
   border-radius: 50px;
   outline: none;
+  p {
+    margin: 0;
+  }
+  
+}
+.product-add-to-cart:hover {
+  background-color: white; /* Change background color to white on hover */
+  border: 2px solid rgb(34, 162, 166); /* Add a red border on hover */
+  color: rgb(34, 162, 166); /* Change text color to red on hover */
 }
 .product-box-category {
   width: 100%;
@@ -149,6 +165,14 @@ justify-content: end;
   margin: 0;
 }
 
+.product-quantity-cart {
+  display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.product-remove-item {
+  width: 90%;
+}
 @media (max-width: 1024px) {
   .product-item {
     width: 30%; /* Display 3 cards per row on screens up to 1024px width */
