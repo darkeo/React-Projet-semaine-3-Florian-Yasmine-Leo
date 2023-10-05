@@ -1,9 +1,11 @@
-import "./HomePage.scss";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ProductList from "../../component/ProductList/ProductList";
-import { getProducts } from "../../store/slices/productsSlice";
-import { selectProducts } from "../../store/selectors/productsSelectors";
+import './HomePage.scss';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ProductList from '../../component/ProductList/ProductList';
+import { getProducts } from '../../store/slices/productsSlice';
+import { selectProducts } from '../../store/selectors/productsSelectors';
+import { selectDarkMode } from '../../store/selectors/darkModeSelectors';
+
 const HomePage = () => {
   const dispatch = useDispatch();
 

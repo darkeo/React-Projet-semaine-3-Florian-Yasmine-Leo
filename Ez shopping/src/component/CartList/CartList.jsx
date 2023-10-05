@@ -93,14 +93,8 @@ const CartList = () => {
           );
         })}
       </div>
-      <button
-        onClick={() => {
-          handleRemoveAll();
-        }}
-      >
-        Remove All
-      </button>
-    </div>
+      </div>
+      
   );
 };
 
