@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  addToLocalStorage,
   getFromLocalStorage,
   isKeyInLocalStorage,
 } from '../../utils/localStorage';
@@ -74,7 +73,7 @@ const cartSlice = createSlice({
       });
       state.cart = newCart;
     },
-    removeAllItems(state, action) {
+    removeAllItems(state) {
       state.cart = [];
     },
   },

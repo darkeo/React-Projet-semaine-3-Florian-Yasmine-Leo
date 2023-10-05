@@ -1,6 +1,5 @@
 import { addToLocalStorage } from '../../utils/localStorage';
 import darkModeSlice from '../slices/darkModeSlice';
-import saveBasketMiddleware from './saveBasketMiddleware';
 
 const saveDarkModeMiddleWare = (store) => (next) => (action) => {
   const nextAction = next(action);
