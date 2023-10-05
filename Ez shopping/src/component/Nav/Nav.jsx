@@ -10,11 +10,15 @@ import { selectUser } from '../../store/selectors/userSelectors';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { switchMode } from '../../store/slices/darkModeSlice';
+import { selectCart } from '../../store/selectors/cartSelectors';
 
 export default function Nav() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const cart = useSelector(selectCart);
+  console.log(cart);
   const [firstName, setFirstName] = useState('Anonyme');
+  const [productsNumber, setProductsNumber] = useState(0);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -22,6 +26,8 @@ export default function Nav() {
   const style = ({ isActive }) => {
     return {
       color: isActive ? 'white' : 'gray',
+      display: 'flex',
+      flexDirection: 'row',
       //   backgroundColor: isActive ? "white" : "rgb(31, 101, 115)",
     };
   };
@@ -34,6 +40,12 @@ export default function Nav() {
         : setFirstName(capitalizeFirstLetter(user.firstName));
     }
   }, [user]);
+
+  useEffect(() => {
+    console.log(cart);
+    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+    setProductsNumber(total);
+  }, [cart]);
 
   const toggleDarkMode = () => {
     dispatch(switchMode());
@@ -49,6 +61,19 @@ export default function Nav() {
           {firstName}
         </NavLink>
         <NavLink style={style} to={'/cart'}>
+          <span
+            style={{
+              display: 'block',
+              textAlign: 'center',
+              backgroundColor: 'red',
+              marginRight: '5px',
+              borderRadius: '50%',
+              height: '30px',
+              width: '30px',
+            }}
+          >
+            {productsNumber}
+          </span>
           Panier
         </NavLink>
         <button
