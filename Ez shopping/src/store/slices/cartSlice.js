@@ -20,6 +20,9 @@ const cartSlice = createSlice({
     // },
     addItemToCart(state, action) {
       const { id, quantity } = action.payload;
+      if (quantity < 1){
+        return
+      }
 
       // Check if the product with the given id already exists in the cart
       const existingProduct = state.cart.find((product) => product.id === id);
