@@ -1,31 +1,59 @@
 @import '../../variables.scss';
+
 .nav-menu {
-    height: 4rem;
-    width: 100%;
-    background-color: rgb(31, 101, 115);
+  height: 4rem;
+  width: 100%;
+  background-color: rgb(31, 101, 115);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .home-link {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: larger;
+  }
+
+  .user {
+    color: white;
+  }
+
+  div {
     display: flex;
-    justify-content: space-around;
+    gap: 1rem;
     align-items: center;
-    .home-link {
-        color: white;
-        font-weight: bold;
-        text-decoration: none;
-        font-size: larger;
-      }
-      .user{
-        color: white;
-      }
-   
-    div {
-        display: flex;
-        gap: 1.250rem;
-        align-items: center;
-    }
-    .button-darkmode {
-      background: $surface-mixed-100;
-      padding: 10px;
-      border-radius: 50%;
-      outline: none;
-      color: $primary-500;
-    }
+  }
+  .button-darkmode,.button-user-box,  .button-cart-box{
+    background: $surface-mixed-100;
+    padding: 10px;
+    border-radius: 50%;
+
+  }
+  .button-darkmode {
+    outline: none;
+    color: $primary-500;
+  }
+
+  .button-user-box {
+    padding: 10px 15px;
+    border-radius: 50px;
+    gap: 0.5rem;
+  }
+
+  .button-cart-box {
+    position: relative;
+  }
+
+  .cart-counter {
+    background: #b00020;
+    color: white;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    font-size: 13px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }

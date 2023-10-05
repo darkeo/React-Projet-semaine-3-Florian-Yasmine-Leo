@@ -34,7 +34,6 @@ export default function Nav() {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      //   backgroundColor: isActive ? "white" : "rgb(31, 101, 115)",
     };
   };
 
@@ -65,28 +64,17 @@ export default function Nav() {
       </NavLink>
       <div>
         <NavLink style={style} to={'/login'}>
-          <ImUser style={{ marginRight: '5px' }} />
-          {firstName}
+          <div className='button-user-box'>
+            <ImUser size={30} />
+            <span>{firstName}</span>
+          </div>
         </NavLink>
         <NavLink style={style} to={'/cart'}>
-          <BsBasket2Fill style={{ marginRight: '5px' }} />
-          <span
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'red',
-              marginRight: '5px',
-              borderRadius: '50%',
-              height: '30px',
-              width: '30px',
-              marginLeft: '5px',
-              color: 'white',
-            }}
-          >
-            {productsNumber}
-          </span>
-          <span>Panier</span>
+          <div style={{ position: 'relative' }} className='button-cart-box'>
+            <BsBasket2Fill size={30} className='cart-icon' />
+            <span className='cart-counter'>{productsNumber}</span>
+          </div>
+          {/* <span>Panier</span> */}
         </NavLink>
         <div
           onClick={() => {

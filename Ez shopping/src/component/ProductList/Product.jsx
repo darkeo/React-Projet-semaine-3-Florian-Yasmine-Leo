@@ -36,8 +36,8 @@ const Product = ({
         </div>
       ) : null}
 
-      <div className='picture-view'>
-        <img src={image} alt={title} className='product-image' />
+      <div className="picture-view">
+        <img src={image} alt={title} className="product-image" />
       </div>
       <div className="product-info">
         <h3
@@ -77,7 +77,7 @@ const Product = ({
                 Quantity
               </p>
               <input
-                type='number'
+                type="number"
                 id={`product-quantity-box-${id}`}
                 className={
                   darkMode
@@ -103,8 +103,14 @@ const Product = ({
             </button>
           </>
         ) : (
-          <div className='product-quantity-cart '>
-            <div>
+          <div className="product-quantity-cart ">
+            <div
+              className={
+                darkMode
+                  ? "dark-pro-but-qua product-buttons-quantity"
+                  : "light-pro-but-qua product-buttons-quantity"
+              }
+            >
               <button
                 // onClick={() => {
                 //   handleDecrease(product.id, product.quantity);
@@ -128,7 +134,11 @@ const Product = ({
               //     handleRemove(product.id);
               //   }}
               onClick={handleRemove}
-              className='product-remove-item'
+              className={
+                darkMode
+                  ? "dark-remove-item product-remove-item"
+                  : "light-remove-item product-remove-item"
+              }
             >
               Remove
             </button>
