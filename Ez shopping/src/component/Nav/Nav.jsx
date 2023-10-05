@@ -74,14 +74,16 @@ export default function Nav() {
           <BsBasket2Fill style={{ marginRight: '5px' }} />
           <span
             style={{
-              display: 'block',
-              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               backgroundColor: 'red',
               marginRight: '5px',
               borderRadius: '50%',
               height: '30px',
               width: '30px',
               marginLeft: '5px',
+              color: 'white'
             }}
           >
             {productsNumber}
