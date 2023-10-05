@@ -4,11 +4,20 @@ import './Cart.scss';
 import { removeAllItems } from '../../store/slices/cartSlice';
 import { selectCart } from '../../store/selectors/cartSelectors';
 import { selectUser } from '../../store/selectors/userSelectors';
+import {
+  getFromLocalStorage,
+  isKeyInLocalStorage,
+} from '../../utils/localStorage';
 
 export default function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-  const user = useSelector(selectUser);
+  const userSelector = useSelector(selectUser);
+  const user = () => {
+    return isKeyInLocalStorage('user')
+      ? getFromLocalStorage('user')
+      : userSelector;
+  };
   console.log(user);
 
   const handleClick = () => {
@@ -17,9 +26,9 @@ export default function Cart() {
   return (
     <div style={{ minHeight: '100vh' }}>
       {cart.length > 0 ? (
-        <h1>{user.firstName}, voici votre panier</h1>
+        <h1>{user().firstName}, voici votre panier</h1>
       ) : (
-        <h1>{user.firstName}, Votre Panier est vide</h1>
+        <h1>{user().firstName}, Votre Panier est vide</h1>
       )}
       {cart.length > 0 && (
         <button
