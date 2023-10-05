@@ -67,56 +67,58 @@ const CartList = () => {
   };
 
   return (
-    <div>
-      <h2>Votre panier</h2>
+    <>
       <div>
-        {cartProducts.map((product, index) => {
-          return (
-            <div key={`${product.id}${index}`}>
-              <div>
-                <img src={product.image} alt={product.title} />
-              </div>
-              <div>
-                <h2>{product.title}</h2>
-                <p>{product.description}</p>
-                <p>{product.price} €</p>
+        <h2>Votre panier</h2>
+        <div>
+          {cartProducts.map((product, index) => {
+            return (
+              <div key={`${product.id}${index}`}>
                 <div>
+                  <img src={product.image} alt={product.title} />
+                </div>
+                <div>
+                  <h2>{product.title}</h2>
+                  <p>{product.description}</p>
+                  <p>{product.price} €</p>
+                  <div>
+                    <button
+                      onClick={() => {
+                        handleDecrease(product.id, product.quantity);
+                      }}
+                    >
+                      -
+                    </button>
+                    <span>{product.quantity}</span>
+                    <button
+                      onClick={() => {
+                        handleIncrease(product.id);
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>{' '}
                   <button
                     onClick={() => {
-                      handleDecrease(product.id, product.quantity);
+                      handleRemove(product.id);
                     }}
                   >
-                    -
+                    Remove
                   </button>
-                  <span>{product.quantity}</span>
-                  <button
-                    onClick={() => {
-                      handleIncrease(product.id);
-                    }}
-                  >
-                    +
-                  </button>
-                </div>{' '}
-                <button
-                  onClick={() => {
-                    handleRemove(product.id);
-                  }}
-                >
-                  Remove
-                </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <button
+          onClick={() => {
+            handleRemoveAll();
+          }}
+        >
+          Remove All
+        </button>
       </div>
-      <button
-        onClick={() => {
-          handleRemoveAll();
-        }}
-      >
-        Remove All
-      </button>
-    </div>
+    </>
   );
 };
 
