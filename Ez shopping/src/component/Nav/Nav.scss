@@ -1,3 +1,4 @@
+@import '../../variables.scss';
 .nav-menu {
     height: 4rem;
     width: 100%;
@@ -20,5 +21,11 @@
         gap: 1.250rem;
         align-items: center;
     }
-  
+    .button-darkmode {
+      background: $surface-mixed-100;
+      padding: 10px;
+      border-radius: 50%;
+      outline: none;
+      color: $primary-500;
+    }
 }
