@@ -26,9 +26,14 @@ export default function Cart() {
   return (
     <div style={{ minHeight: '100vh' }}>
       {cart.length > 0 ? (
-        <h1>{user().firstName}, voici votre panier</h1>
+        <h1>
+          {user().firstName.length > 0
+            ? `${user().firstName},`
+            : `${user().firstName}`}{' '}
+          voici votre panier
+        </h1>
       ) : (
-        <h1>{user().firstName}, votre Panier est vide</h1>
+        <h1>{`${user().firstName},`} votre Panier est vide</h1>
       )}
       {cart.length > 0 && (
         <button
