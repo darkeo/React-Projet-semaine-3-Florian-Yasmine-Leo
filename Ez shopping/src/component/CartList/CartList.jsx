@@ -17,7 +17,7 @@ import { selectProducts } from '../../store/selectors/productsSelectors';
 
 const CartList = () => {
   const cart = useSelector(selectCart);
-  const products = useSelector(selectProducts);
+  const products = getFromLocalStorage('products') || [];
   const dispatch = useDispatch();
   const localStorageCart = () => {
     if (isKeyInLocalStorage('cart')) {
