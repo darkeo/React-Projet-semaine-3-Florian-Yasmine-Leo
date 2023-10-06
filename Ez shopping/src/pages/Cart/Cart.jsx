@@ -1,15 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import CartList from "../../component/CartList/CartList";
-import "./Cart.scss";
-import { removeAllItems } from "../../store/slices/cartSlice";
-import { selectCart } from "../../store/selectors/cartSelectors";
-import { selectUser } from "../../store/selectors/userSelectors";
-import { selectDarkMode } from "../../store/selectors/darkModeSelectors";
+import { useDispatch, useSelector } from 'react-redux';
+import CartList from '../../component/CartList/CartList';
+import './Cart.scss';
+import { removeAllItems } from '../../store/slices/cartSlice';
+import { selectCart } from '../../store/selectors/cartSelectors';
+import { selectUser } from '../../store/selectors/userSelectors';
+import { selectDarkMode } from '../../store/selectors/darkModeSelectors';
 import { capitalizeFirstLetter } from '../../utils/capitalize';
 import {
   getFromLocalStorage,
   isKeyInLocalStorage,
-} from "../../utils/localStorage";
+} from '../../utils/localStorage';
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -17,9 +17,13 @@ export default function Cart() {
   const userSelector = useSelector(selectUser);
   const darkMode = useSelector(selectDarkMode);
 
+  const quantity = cart.reduce((acc, item) => {
+    return acc + item.quantity;
+  }, 0);
+
   const user = () => {
-    return isKeyInLocalStorage("user")
-      ? getFromLocalStorage("user")
+    return isKeyInLocalStorage('user')
+      ? getFromLocalStorage('user')
       : userSelector;
   };
   console.log(user);
@@ -28,33 +32,32 @@ export default function Cart() {
     dispatch(removeAllItems());
   };
   return (
-    <div 
-    className='page-cart'
-    >
-      <div className="cart-title-and-button-box">
+    <div className='page-cart'>
+      <div className='cart-title-and-button-box'>
         {cart.length > 0 ? (
           <h1>
-          {user().firstName.length > 0
-            ? `${capitalizeFirstLetter(user().firstName)},`
-            : `${capitalizeFirstLetter(user().firstName)}`}{' '}
-          voici votre panier
-        </h1>
+            {user().firstName.length > 0
+              ? `${capitalizeFirstLetter(user().firstName)},`
+              : `${capitalizeFirstLetter(user().firstName)}`}{' '}
+            votre panier contient{' '}
+            {quantity > 1 ? `${quantity} articles` : `${quantity} article`}
+          </h1>
         ) : (
           <h1>
-          {user().firstName.length > 0
-            ? `${capitalizeFirstLetter(user().firstName)},`
-            : `${capitalizeFirstLetter(user().firstName)}`}{' '}
-          votre panier est vide
-        </h1>
+            {user().firstName.length > 0
+              ? `${capitalizeFirstLetter(user().firstName)},`
+              : `${capitalizeFirstLetter(user().firstName)}`}{' '}
+            votre panier est vide
+          </h1>
         )}
 
         {cart.length > 0 && (
-          <div className="cart-button-remove-all">
+          <div className='cart-button-remove-all'>
             <button
               className={
                 darkMode
-                  ? "dark-rem-all cart-remove-all-button"
-                  : "light-rem-all cart-remove-all-button"
+                  ? 'dark-rem-all cart-remove-all-button'
+                  : 'light-rem-all cart-remove-all-button'
               }
               onClick={() => {
                 handleClick();
