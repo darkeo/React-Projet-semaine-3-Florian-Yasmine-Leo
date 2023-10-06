@@ -7,17 +7,12 @@
 
 .cart-title-and-button-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   gap: 2rem;
   padding-bottom: 2rem;
-  flex-wrap: wrap;
-
-  h1 {
-    width: 40%;
-  }
 
   .cart-button-remove-all {
+    text-align: right;
     button {
       border-radius: 20px;
       background: $danger-100;
