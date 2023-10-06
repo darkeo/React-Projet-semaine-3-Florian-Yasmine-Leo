@@ -120,7 +120,7 @@ const Product = ({
                 -
               </button>
               <span className={darkMode ? "dark-quantity-display" : ""}>{quantity}</span>
-              <button className='quantity-button'
+              <button
                 // onClick={() => {
                 //   handleIncrease(product.id);
                 // }}
