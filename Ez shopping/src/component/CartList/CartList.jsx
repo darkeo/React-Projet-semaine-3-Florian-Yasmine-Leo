@@ -13,7 +13,6 @@ import {
   isKeyInLocalStorage,
 } from '../../utils/localStorage';
 import Product from '../ProductList/Product';
-import { selectProducts } from '../../store/selectors/productsSelectors';
 
 const CartList = () => {
   const cart = useSelector(selectCart);
