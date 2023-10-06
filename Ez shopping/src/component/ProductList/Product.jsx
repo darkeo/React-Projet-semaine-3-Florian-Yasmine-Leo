@@ -104,8 +104,8 @@ const Product = ({
           </>
         ) : (
           <div className='product-quantity-cart '>
-            <div>
-              <button
+            <div className='quantity-manager'>
+              <button className='quantity-button'
                 // onClick={() => {
                 //   handleDecrease(product.id, product.quantity);
                 // }}
@@ -113,8 +113,8 @@ const Product = ({
               >
                 -
               </button>
-              <span>{quantity}</span>
-              <button
+              <span className={darkMode ? "dark-quantity-display" : ""}>{quantity}</span>
+              <button className='quantity-button'
                 // onClick={() => {
                 //   handleIncrease(product.id);
                 // }}
