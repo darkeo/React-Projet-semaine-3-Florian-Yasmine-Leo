@@ -28,7 +28,9 @@ export default function Cart() {
     dispatch(removeAllItems());
   };
   return (
-    <div style={{ minHeight: "100vh" }} className="cart-parent">
+    <div 
+    className='page-cart'
+    >
       <div className="cart-title-and-button-box">
         {cart.length > 0 ? (
           <h1>

@@ -65,6 +65,7 @@
 
 .light-add {
   background: $primary-100;
+  color: white;
 }
 
 .light-add:hover {
@@ -245,26 +246,37 @@
   width: 90%;
   // background: $danger-100;
 }
-.dark-remove-item{
+
+.dark-remove-item {
   background: $danger-200;
-  
+  color: $surface-mixed-100;
 }
-.dark-remove-item:hover{
+
+.dark-remove-item:hover {
   color: $danger-200;
   border: 1px solid $danger-200;
   background: $surface-mixed-200;
-  
+
 }
 
-.light-remove-item{
+.light-remove-item {
   background: $danger-100;
+  color: white;
 
 }
-.light-remove-item:hover{
-  
+
+.light-remove-item:hover {
+
   color: $danger-100;
   border: 1px solid $danger-100;
   background: white;
+}
+
+.light-pro-but-qua {
+  button {
+    background: $danger-200;
+    color: white;
+  }
 }
 
 @media (max-width: 480px) {

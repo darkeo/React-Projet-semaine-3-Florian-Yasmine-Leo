@@ -20,7 +20,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh' }}>
+    <div 
+    className='page-homepage'
+    >
       <h1> Liste des Produits</h1>
       <ProductList products={products} />
     </div>

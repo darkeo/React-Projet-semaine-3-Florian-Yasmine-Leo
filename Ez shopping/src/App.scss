@@ -5,16 +5,15 @@
   margin: 0 auto;
   text-align: center;
   font-family: "DM Sans","Roboto",-apple-system,"Segoe UI",sans-serif;
-
 }
 
 .darkMode {
-  background-color: $surface-mixed-100;
+  background: $surface-mixed-100;
   color: $primary-600;
 }
 
 .lightMode {
-  background-color: #F5F6FA;
+  background: #F5F6FA;
   color: #333;
 }
 

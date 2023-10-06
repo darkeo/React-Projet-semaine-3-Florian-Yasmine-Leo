@@ -15,7 +15,7 @@ function App() {
         <header>
           <Nav />
         </header>
-        <div>
+        <div className='page'>
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<Login />} />
