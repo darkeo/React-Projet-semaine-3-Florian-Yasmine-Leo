@@ -1,16 +1,16 @@
-import './Login.scss';
-import { useDispatch } from 'react-redux';
-import { modifyPendingUser, validateUser } from '../../store/slices/userSlice';
-import { useSelector } from 'react-redux';
+import "./Login.scss";
+import { useDispatch } from "react-redux";
+import { modifyPendingUser, validateUser } from "../../store/slices/userSlice";
+import { useSelector } from "react-redux";
 import {
   selectErrors,
   selectPendingUser,
-} from '../../store/selectors/userSelectors';
+} from "../../store/selectors/userSelectors";
 import {
   getFromLocalStorage,
   isKeyInLocalStorage,
-} from '../../utils/localStorage';
-import { capitalizeFirstLetter } from '../../utils/capitalize';
+} from "../../utils/localStorage";
+import { capitalizeFirstLetter } from "../../utils/capitalize";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -39,59 +39,60 @@ const Login = () => {
   };
 
   const displayFirstName = () => {
-    if (isKeyInLocalStorage('user')) {
-      const firstName = getFromLocalStorage('user').firstName;
+    if (isKeyInLocalStorage("user")) {
+      const firstName = getFromLocalStorage("user").firstName;
       return capitalizeFirstLetter(firstName);
     }
     return;
   };
 
   return (
-    <>
-      <div className='page'>
-        <h1>Hi {displayFirstName()}</h1>
-        <h2>Customize your profile here</h2>
-        <form className='form' onSubmit={submitForm}>
-          <label>
-            Your firstname :
+    <div className="page-login">
+      <h1>Hi {displayFirstName()}</h1>
+      <h2>Customize your profile here</h2>
+      <div className="form-container">
+        <form className="form" onSubmit={submitForm}>
+          <div className="form-input-box">
+            <label>Firstname</label>
             <input
               onChange={handleFirstNameChange}
-              type='text'
+              type="text"
               value={pendingUser.firstName}
+              placeholder="Jhon"
             />
-          </label>
-          <br />
-          <label>
-            Your lastName :
+          </div>
+          <div className="form-input-box">
+            <label>LastName</label>
             <input
               onChange={handleLastNameChange}
-              type='text'
+              type="text"
               value={pendingUser.lastName}
+              placeholder="Smith"
             />
-          </label>
-          <br />
-          <label>
-            Your email :
+          </div>
+          <div className="form-input-box">
+            <label>Email</label>
             <input
-              type='email'
+              type="email"
               onChange={handleEmailChange}
               value={pendingUser.email}
+              placeholder="your@email.com"
             />
-          </label>
+          </div>
           <ul>
             {errors &&
               errors.map((error, index) => {
                 return (
-                  <li className='errorMessage' key={index}>
+                  <li className="errorMessage" key={index}>
                     {error}
                   </li>
                 );
               })}
           </ul>
-          <input className='form__button' type='submit' value={'Save'} />
+          <button className="form__button" type="submit" >Save</button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
