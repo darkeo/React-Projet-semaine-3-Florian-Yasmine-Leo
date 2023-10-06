@@ -5,6 +5,7 @@ import { removeAllItems } from "../../store/slices/cartSlice";
 import { selectCart } from "../../store/selectors/cartSelectors";
 import { selectUser } from "../../store/selectors/userSelectors";
 import { selectDarkMode } from "../../store/selectors/darkModeSelectors";
+import { capitalizeFirstLetter } from '../../utils/capitalize';
 import {
   getFromLocalStorage,
   isKeyInLocalStorage,
@@ -31,13 +32,18 @@ export default function Cart() {
       <div className="cart-title-and-button-box">
         {cart.length > 0 ? (
           <h1>
-            {user().firstName.length > 0
-              ? `${user().firstName},`
-              : `${user().firstName}`}{" "}
-            voici votre panier
-          </h1>
+          {user().firstName.length > 0
+            ? `${capitalizeFirstLetter(user().firstName)},`
+            : `${capitalizeFirstLetter(user().firstName)}`}{' '}
+          voici votre panier
+        </h1>
         ) : (
-          <h1>{`${user().firstName},`} votre Panier est vide</h1>
+          <h1>
+          {user().firstName.length > 0
+            ? `${capitalizeFirstLetter(user().firstName)},`
+            : `${capitalizeFirstLetter(user().firstName)}`}{' '}
+          votre panier est vide
+        </h1>
         )}
 
         {cart.length > 0 && (

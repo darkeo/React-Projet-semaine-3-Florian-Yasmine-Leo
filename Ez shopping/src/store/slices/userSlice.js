@@ -32,17 +32,31 @@ const userSlice = createSlice({
       const newUser = action.payload;
       const regexEmail =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      const regexSpecialCharacters = /^[a-zA-Z0-9.]*$/;
+      const disallowedChars = `! @ # $ % ^ & * ( ) _ + - = [ ] { } ; : , < > / ?  | " \\ '`;
+
       if (newUser.firstName.length === 0) {
         state.errors.push('Veuillez entrer votre prénom');
       }
       if (newUser.firstName.length > 30) {
         state.errors.push('Le champs "Prénom" est limité à 30 caractères');
       }
+      if (!newUser.firstName.toLowerCase().match(regexSpecialCharacters)) {
+        state.errors.push(
+          `Votre prénom ne doit pas contenir de caractères spéciaux ${disallowedChars}`
+        );
+      }
       if (newUser.lastName.length === 0) {
         state.errors.push('Veuillez entrer votre nom');
       }
       if (newUser.lastName.length > 30) {
         state.errors.push('Le champs "Nom" est limité à 30 caractères');
+      }
+      if (!newUser.lastName.toLowerCase().match(regexSpecialCharacters)) {
+        state.errors.push(
+          `Votre nom ne doit pas contenir de caractères spéciaux ${disallowedChars}`
+        );
       }
       if (newUser.email.length === 0) {
         state.errors.push('Veuillez entrer votre adresse email');

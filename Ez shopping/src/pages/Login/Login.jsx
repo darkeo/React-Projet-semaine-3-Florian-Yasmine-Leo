@@ -10,16 +10,13 @@ import {
   getFromLocalStorage,
   isKeyInLocalStorage,
 } from '../../utils/localStorage';
+import { capitalizeFirstLetter } from '../../utils/capitalize';
 
 const Login = () => {
   const dispatch = useDispatch();
   const pendingUser = useSelector(selectPendingUser);
 
   const errors = useSelector(selectErrors);
-
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
