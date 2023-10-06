@@ -7,12 +7,12 @@ import { selectDarkMode } from "../../store/selectors/darkModeSelectors";
 import {
   selectErrors,
   selectPendingUser,
-} from "../../store/selectors/userSelectors";
+} from '../../store/selectors/userSelectors';
 import {
   getFromLocalStorage,
   isKeyInLocalStorage,
-} from "../../utils/localStorage";
-import { capitalizeFirstLetter } from "../../utils/capitalize";
+} from '../../utils/localStorage';
+import { capitalizeFirstLetter } from '../../utils/capitalize';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -42,15 +42,15 @@ const Login = () => {
   };
 
   const displayFirstName = () => {
-    if (isKeyInLocalStorage("user")) {
-      const firstName = getFromLocalStorage("user").firstName;
+    if (isKeyInLocalStorage('user')) {
+      const firstName = getFromLocalStorage('user').firstName;
       return capitalizeFirstLetter(firstName);
     }
     return;
   };
 
   return (
-    <div className="page-login">
+    <div className='page-login'>
       <h1>Hi {displayFirstName()}</h1>
       <h2>Customize your profile here</h2>
       <div className="form-container">
@@ -59,34 +59,34 @@ const Login = () => {
             <label>Firstname</label>
             <input
               onChange={handleFirstNameChange}
-              type="text"
+              type='text'
               value={pendingUser.firstName}
-              placeholder="Jhon"
+              placeholder='Jhon'
             />
           </div>
-          <div className="form-input-box">
+          <div className='form-input-box'>
             <label>LastName</label>
             <input
               onChange={handleLastNameChange}
-              type="text"
+              type='text'
               value={pendingUser.lastName}
-              placeholder="Smith"
+              placeholder='Smith'
             />
           </div>
-          <div className="form-input-box">
+          <div className='form-input-box'>
             <label>Email</label>
             <input
-              type="email"
+              type='email'
               onChange={handleEmailChange}
               value={pendingUser.email}
-              placeholder="your@email.com"
+              placeholder='your@email.com'
             />
           </div>
-          <ul>
+          <ul style={{ padding: '0px', width: '70%', margin: '0 auto' }}>
             {errors &&
               errors.map((error, index) => {
                 return (
-                  <li className="errorMessage" key={index}>
+                  <li className='errorMessage' key={index}>
                     {error}
                   </li>
                 );

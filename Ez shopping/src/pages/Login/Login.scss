@@ -1,11 +1,12 @@
 @import '../../variables.scss';
 
-
 .errorMessage {
-  color: red;
   list-style-type: none;
-  border: 1px solid $danger-100;
+  border-radius: 20px;
+  color: $danger-100;
   padding: 0.2rem;
+  margin-bottom: 2px;
+  text-align: left;
 }
 
 .page-login {
@@ -41,14 +42,14 @@
     justify-content: center;
     width: 70%;
     margin: 0 auto;
-    gap: 0.250rem;
+    gap: 0.25rem;
   }
 
   input {
     border-radius: 10px;
     border: none;
     padding: 1rem;
-    background: #F5F6FA;
+    background: #f5f6fa;
     font-size: 1rem;
   }
 
@@ -69,7 +70,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: #F5F6FA;
+      background-color: #f5f6fa;
       border: 1px solid $primary-100;
       color: $primary-100;
     }

@@ -1,47 +1,47 @@
 @import './../../variables.scss';
 
 .page-cart {
-   padding: 2rem;
-   min-height: 100vh;
+  padding: 2rem;
+  min-height: 100vh;
 }
 
 .cart-title-and-button-box {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 2rem;
-   padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  flex-wrap: wrap;
 
-   h1 {
-      width: 40%;
-   }
+  h1 {
+    width: 40%;
+  }
 
-   .cart-button-remove-all {
-      button {
-         border-radius: 20px;
-         background: $danger-100;
-         border: 1px solid $danger-100;
-      }
+  .cart-button-remove-all {
+    button {
+      border-radius: 20px;
+      background: $danger-100;
+      border: 1px solid $danger-100;
+    }
 
-      button:hover {
-         background: white;
-         color: $danger-100;
-      }
+    button:hover {
+      background: white;
+      color: $danger-100;
+    }
 
-      .dark-rem-all {
-         background: $danger-200;
-         color: $surface-mixed-100;
-         border: 1px solid $danger-200;
-      }
+    .dark-rem-all {
+      background: $danger-200;
+      color: $surface-mixed-100;
+      border: 1px solid $danger-200;
+    }
 
-      .dark-rem-all:hover {
-         color: $danger-200;
-         background: $surface-mixed-100;
+    .dark-rem-all:hover {
+      color: $danger-200;
+      background: $surface-mixed-100;
+    }
 
-      }
-
-      .light-rem-all {
-         color: white;
-      }
-   }
+    .light-rem-all {
+      color: white;
+    }
+  }
 }
