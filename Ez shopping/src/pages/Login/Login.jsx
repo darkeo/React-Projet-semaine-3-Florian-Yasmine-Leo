@@ -86,7 +86,7 @@ const Login = () => {
             {errors &&
               errors.map((error, index) => {
                 return (
-                  <li className='errorMessage' key={index}>
+                  <li className={darkMode ? 'dark-error errorMessage' : 'light-error errorMessage'} key={index}>
                     {error}
                   </li>
                 );
