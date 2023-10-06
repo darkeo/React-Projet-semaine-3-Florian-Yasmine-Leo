@@ -25,7 +25,7 @@ export default function Nav() {
   console.log(cart);
   const [firstName, setFirstName] = useState('Anonyme');
   const [productsNumber, setProductsNumber] = useState(0);
-  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(getFromLocalStorage('darkMode')); // State for dark mode
 
   const style = ({ isActive }) => {
     return {
