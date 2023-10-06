@@ -33,7 +33,7 @@ const userSlice = createSlice({
       const regexEmail =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-      const regexSpecialCharacters = /^[a-zA-Z0-9.]*$/;
+      const regexSpecialCharacters = /^(|[A-Za-zÀ-ÖØ-öø-ÿ\s-\d]+)$/;
       const disallowedChars = `! @ # $ % ^ & * ( ) _ + - = [ ] { } ; : , < > / ?  | " \\ '`;
 
       if (newUser.firstName.length === 0) {
