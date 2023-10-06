@@ -2,6 +2,8 @@ import "./Login.scss";
 import { useDispatch } from "react-redux";
 import { modifyPendingUser, validateUser } from "../../store/slices/userSlice";
 import { useSelector } from "react-redux";
+import { selectDarkMode } from "../../store/selectors/darkModeSelectors";
+
 import {
   selectErrors,
   selectPendingUser,
@@ -14,9 +16,10 @@ import { capitalizeFirstLetter } from "../../utils/capitalize";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const pendingUser = useSelector(selectPendingUser);
 
+  const pendingUser = useSelector(selectPendingUser);
   const errors = useSelector(selectErrors);
+  const darkMode = useSelector(selectDarkMode);
 
   const handleFirstNameChange = (e) => {
     const value = e.target.value;
@@ -51,7 +54,7 @@ const Login = () => {
       <h1>Hi {displayFirstName()}</h1>
       <h2>Customize your profile here</h2>
       <div className="form-container">
-        <form className="form" onSubmit={submitForm}>
+        <form className={darkMode ? "dark-form form" : "light-form form"} onSubmit={submitForm}>
           <div className="form-input-box">
             <label>Firstname</label>
             <input
@@ -89,7 +92,9 @@ const Login = () => {
                 );
               })}
           </ul>
-          <button className="form__button" type="submit" >Save</button>
+          <button className={darkMode ? "dark-button form__button" : "light-button form__button"} type="submit">
+            Save
+          </button>
         </form>
       </div>
     </div>

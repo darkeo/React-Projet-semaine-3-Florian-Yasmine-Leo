@@ -76,3 +76,19 @@
   }
 
 }
+
+.dark-form {
+  background: $surface-mixed-200;
+  box-shadow: none;
+
+  .dark-button{
+    background: $primary-500;
+    color: $surface-mixed-100;
+    border: 1px solid $primary-500;
+  }
+  .dark-button:hover{
+    background-color: $surface-mixed-200;
+    color: $primary-500;
+    border: 1px solid $primary-500;
+  }
+}
