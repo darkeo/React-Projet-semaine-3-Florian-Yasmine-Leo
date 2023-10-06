@@ -243,27 +243,27 @@
   border-radius: 20px;
   outline: none;
   width: 90%;
-  // background: #b00020;
+  // background: $danger-100;
 }
 .dark-remove-item{
-  background: #cf6679;
+  background: $danger-200;
   
 }
 .dark-remove-item:hover{
-  color: #cf6679;
-  border: 1px solid #cf6679;
+  color: $danger-200;
+  border: 1px solid $danger-200;
   background: $surface-mixed-200;
   
 }
 
 .light-remove-item{
-  background: #b00020;
+  background: $danger-100;
 
 }
 .light-remove-item:hover{
   
-  color: #b00020;
-  border: 1px solid #b00020;
+  color: $danger-100;
+  border: 1px solid $danger-100;
   background: white;
 }
 
